@@ -5,9 +5,7 @@ import numpy as np
 import pandas as pd
 from matplotlib.patches import Patch
 
-
-ROOT = Path(r"C:\Users\HAO\Desktop\YTY_from_macbook")
-OUT_DIR = ROOT / "\u8ad6\u6587" / "paper_figures"
+OUT_DIR = Path(__file__).resolve().parent
 SOURCE_TABLE_DIR = OUT_DIR / "source_tables"
 
 CONFUSION_5CH = (
