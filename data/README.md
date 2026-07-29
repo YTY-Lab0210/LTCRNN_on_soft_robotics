@@ -45,7 +45,7 @@ Sponge Dice_001.csv
 
 ```text
 3D-Printed Part   100
-Baseball           99
+Baseball          100
 Bottle            100
 Optical Mouse     100
 Plush Toy         100
@@ -59,10 +59,8 @@ Tape              100
 Total:
 
 ```text
-999 CSV files
+1000 CSV files
 ```
-
-The `Baseball` class currently has 99 samples because one valid baseball sample was missing during final dataset cleanup.
 
 ## Preprocessing
 

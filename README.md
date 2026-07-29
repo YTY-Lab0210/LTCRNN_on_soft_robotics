@@ -43,7 +43,7 @@ data/dataset_new_new_new/
 
 It contains the renamed raw ADC sequences using the same display labels as the confusion-matrix figures, such as `Baseball`, `Bottle`, `Sponge Dice`, and `3D-Printed Part`.
 
-The current dataset has 999 CSV files: 99 `Baseball` samples and 100 samples for each of the other nine classes. See `data/README.md` for the full class list and counts.
+The current dataset has 1000 CSV files, with 100 samples for each of the 10 object classes. See `data/README.md` for the full class list and counts.
 
 A 3-channel version is also provided:
 
