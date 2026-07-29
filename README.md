@@ -8,7 +8,7 @@ The project focuses on flex-sensor time-series signals collected from a five-fin
 
 ```text
 data/
-  dataset_xx2020_new_new_new/     Main 10-class dataset, raw and z-score versions
+  dataset_new_new_new/            Main renamed 10-class raw dataset
 
 src/
   ltc_bptt_5ch/                   LTC-RNN training, benchmark, few-shot, and deployment export scripts
@@ -37,17 +37,12 @@ docs/
 The main dataset is under:
 
 ```text
-data/dataset_xx2020_new_new_new/
+data/dataset_new_new_new/
 ```
 
-It contains both raw ADC sequences and z-score normalized sequences:
+It contains the renamed raw ADC sequences using the same display labels as the confusion-matrix figures, such as `Baseball`, `Bottle`, `Sponge Dice`, and `3D-Printed Part`.
 
-```text
-dataset_602020/          Raw split
-dataset_602020_zscore/   Z-score normalized split
-```
-
-Each split contains `training`, `validation`, and `test` folders. See `data/README.md` for class-name mapping and sample counts.
+The current dataset has 999 CSV files: 99 `Baseball` samples and 100 samples for each of the other nine classes. See `data/README.md` for the full class list and counts.
 
 ## Python Setup
 

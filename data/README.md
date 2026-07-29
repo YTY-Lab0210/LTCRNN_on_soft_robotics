@@ -5,53 +5,53 @@
 The main dataset is:
 
 ```text
-dataset_xx2020_new_new_new/
+dataset_new_new_new/
 ```
 
-It contains two versions:
+This is the renamed raw ADC dataset. File names use the display labels used in the confusion-matrix figures.
+
+Each CSV file is a 5-channel time-series recording from flex sensors mounted on the soft robotic hand.
+
+## File Naming
+
+Example:
 
 ```text
-dataset_602020/          Raw ADC data
-dataset_602020_zscore/   Z-score normalized data
+Baseball_001.csv
+Bottle_001.csv
+Sponge Dice_001.csv
+3D-Printed Part_001.csv
 ```
 
-Each sequence is a 5-channel time series from flex sensors mounted on the soft robotic hand.
-
-## Split
-
-The naming `602020` means the dataset is split into training, validation, and test sets:
+## Class Counts
 
 ```text
-training/
-validation/
-test/
+3D-Printed Part   100
+Baseball           99
+Bottle            100
+Optical Mouse     100
+Plush Toy         100
+Rubik's Cube      100
+Smartphone        100
+Sponge Dice       100
+Stuffed Ball      100
+Tape              100
 ```
 
-The current raw split has:
+Total:
 
 ```text
-training:   59 or 60+ samples per class, depending on class availability
-validation: 20 samples per class
-test:       20 samples per class
+999 CSV files
 ```
 
-The `ball` class currently has 59 training samples because one valid baseball sample was missing during the final data cleanup.
+The `Baseball` class currently has 99 samples because one valid baseball sample was missing during final dataset cleanup.
 
-## Class Mapping
+## Preprocessing
 
-The file prefixes map to the paper/display labels as follows:
+This folder stores the raw renamed dataset. Z-score normalized data can be regenerated from the raw CSV files using the preprocessing utilities in:
 
 ```text
-ball        -> Baseball
-bottle      -> Bottle
-cube        -> Sponge Dice
-cylinder    -> Tape
-doll        -> Plush Toy
-mouse       -> Optical Mouse
-phone       -> Smartphone
-rubik_cube  -> Rubik's Cube
-small_ball  -> Stuffed Ball
-support     -> 3D-Printed Part
+src/utils/z_score.py
 ```
 
 ## Input Channels
