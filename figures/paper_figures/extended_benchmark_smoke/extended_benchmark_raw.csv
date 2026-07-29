@@ -1,0 +1,2 @@
+﻿Channel,Model,Run,TrainableParams,Accuracy(%),Macro-F1(%),TestLoss,BestValAccuracy(%),BestValLoss,EpochsTrained,InputColumns
+3ch,SimpleRNN-4,1,82,19.499999284744263,10.1259559154296,1.8310502767562866,20.499999821186066,1.827642560005188,1,"Thumb,Middle,Pinky"

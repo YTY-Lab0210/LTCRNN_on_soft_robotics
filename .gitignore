@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Training caches and checkpoints
+*.npy
+*.npz
+*.h5
+*.keras
+*.ckpt
+checkpoint*/
+checkpoints/
+logs/
+runs/
+
+# Local/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Temporary exports
+*.tmp
+*.bak
+*_backup*/
+
+# Private thesis/admin files are intentionally excluded.
+docs/private/

@@ -1,0 +1,2 @@
+﻿Channel,Model,Runs,TrainableParams,MeanAccuracy,StdAccuracy,MeanMacroF1,StdMacroF1,MeanTestLoss
+3ch,SimpleRNN-4,1,82,19.499999284744263,,10.1259559154296,,1.8310502767562864

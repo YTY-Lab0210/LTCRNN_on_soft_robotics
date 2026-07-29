@@ -1,0 +1,4 @@
+Model,5-channel,3-channel
+Vanilla RNN-8,202,186
+LSTM-8,538,474
+LTC-4,110,86
