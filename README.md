@@ -27,8 +27,8 @@
 ## 硬體與感測示意
 
 <p align="center">
-  <img src="figures/paper_figures/soft_finger_cutout.png" width="170" alt="Soft finger">
-  <img src="figures/paper_figures/flex_sensor_cutout.png" width="170" alt="Flex sensor">
+  <img src="figures/paper_figures/soft_finger_cutout.png" height="120" alt="Soft finger">
+  <img src="figures/paper_figures/flex_sensor_cutout.png" height="120" alt="Flex sensor">
 </p>
 
 軟式手指在抓握物體時會產生彎曲變形，flex sensor 將變形轉換成 ADC 數值。不同物件的形狀、尺寸、硬度與接觸位置不同，因此五根手指的彎曲序列會形成不同的觸覺特徵。

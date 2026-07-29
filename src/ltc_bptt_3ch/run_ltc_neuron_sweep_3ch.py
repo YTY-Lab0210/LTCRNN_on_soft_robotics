@@ -11,6 +11,7 @@ import pandas as pd
 import tensorflow as tf
 from keras.utils import to_categorical
 from sklearn.preprocessing import LabelEncoder
+from dataset_loader_3ch import DEFAULT_DATASET_PATH, load_split_dataset
 
 
 os.environ["MPLCONFIGDIR"] = tempfile.gettempdir()
@@ -19,10 +20,7 @@ os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 
 TARGET_LINES = 400
 CHANNELS_3CH = ["Thumb", "Middle", "Pinky"]
-DEFAULT_BASE_PATH = (
-    r"C:\Users\HAO\Desktop\YTY_from_macbook"
-    r"\dataset_xx2020_new_new_new\dataset_602020_zscore"
-)
+DEFAULT_BASE_PATH = str(DEFAULT_DATASET_PATH)
 
 
 def parse_args():
@@ -82,9 +80,7 @@ def load_sensor_data(folder_path):
 
 
 def load_dataset(base_path):
-    x_train, y_train_raw = load_sensor_data(os.path.join(base_path, "training"))
-    x_val, y_val_raw = load_sensor_data(os.path.join(base_path, "validation"))
-    x_test, y_test_raw = load_sensor_data(os.path.join(base_path, "test"))
+    (x_train, y_train_raw), (x_val, y_val_raw), (x_test, y_test_raw) = load_split_dataset(base_path)
 
     encoder = LabelEncoder()
     y_train_encoded = encoder.fit_transform(y_train_raw)

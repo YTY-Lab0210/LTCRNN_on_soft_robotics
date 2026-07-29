@@ -7,11 +7,12 @@ import tensorflow as tf
 import keras
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from keras.utils import to_categorical
+from dataset_loader_3ch import DEFAULT_DATASET_PATH, load_split_dataset
 
 # ================= 1. 全局設定 =================
 TARGET_LINES = 400
 # 🚨 請確認資料夾路徑是否正確
-BASE_PATH = r'C:\Users\HAO\Desktop\YTY_from_macbook\dataset_xx2020_new_new_new\dataset_602020_zscore' 
+BASE_PATH = DEFAULT_DATASET_PATH
 
 # 定義要測試的所有模型名稱
 model_configs = ['1D-CNN', 'SimpleRNN-8', 'LSTM-8', 'LTC-4']
@@ -80,9 +81,7 @@ if __name__ == "__main__":
     print(f"{'='*60}")
     
     # --- A. 載入數據 (只需載入一次) ---
-    X_train_raw, y_train_raw = load_sensor_data(os.path.join(BASE_PATH, 'training'))
-    X_val_raw, y_val_raw     = load_sensor_data(os.path.join(BASE_PATH, 'validation'))
-    X_test_raw, y_test_raw   = load_sensor_data(os.path.join(BASE_PATH, 'test'))
+    (X_train_raw, y_train_raw), (X_val_raw, y_val_raw), (X_test_raw, y_test_raw) = load_split_dataset(BASE_PATH)
     
     # --- B. 標籤轉換 ---
     encoder = LabelEncoder()

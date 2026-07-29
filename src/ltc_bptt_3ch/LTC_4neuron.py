@@ -8,10 +8,11 @@ import keras
 import sys
 from sklearn.preprocessing import LabelEncoder
 from keras.utils import to_categorical
+from dataset_loader_3ch import DEFAULT_DATASET_PATH, load_split_dataset
 
 # ================= 全局設定 =================
 TARGET_LINES = 400
-BASE_PATH = r"C:\Users\HAO\Desktop\YTY_from_macbook\dataset_xx2020_new_new_new\dataset_602020_zscore"
+BASE_PATH = DEFAULT_DATASET_PATH
 
 # ================= 1. 資料讀取與前處理函式 =================
 def load_sensor_data(folder_path):
@@ -35,10 +36,8 @@ def load_sensor_data(folder_path):
     return np.array(signal_list), np.array(label_list)
 
 def load_split_data(base_path):
-    print("🔍 正在從三個資料夾獨立載入數據...")
-    signal_train_raw, label_train_raw = load_sensor_data(os.path.join(base_path, 'training'))
-    signal_val_raw, label_val_raw     = load_sensor_data(os.path.join(base_path, 'validation'))
-    signal_test_raw, label_test_raw   = load_sensor_data(os.path.join(base_path, 'test'))
+    print("🔍 正在載入新的 3-channel dataset...")
+    (signal_train_raw, label_train_raw), (signal_val_raw, label_val_raw), (signal_test_raw, label_test_raw) = load_split_dataset(base_path)
 
     print(f"✅ 載入完成！ Train: {len(signal_train_raw)}筆 | Val: {len(signal_val_raw)}筆 | Test: {len(signal_test_raw)}筆")
     return (signal_train_raw, label_train_raw), (signal_val_raw, label_val_raw), (signal_test_raw, label_test_raw)

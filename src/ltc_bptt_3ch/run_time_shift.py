@@ -9,6 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 from keras.utils import to_categorical
 import tempfile
 import seaborn as sns 
+from dataset_loader_3ch import DEFAULT_DATASET_PATH, load_split_dataset
 
 # 讓終端機保持乾淨，消除不必要的警告
 os.environ['MPLCONFIGDIR'] = tempfile.gettempdir()
@@ -17,7 +18,7 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 # ================= 1. 全局設定 =================
 TARGET_LINES = 400
-BASE_PATH = r'C:\Users\HAO\Desktop\YTY_from_macbook\dataset_xx2020_new_new_new\dataset_602020_zscore' 
+BASE_PATH = DEFAULT_DATASET_PATH
 
 model_configs = ['1D-CNN', 'SimpleRNN-8', 'LSTM-8', 'LTC-4']
 
@@ -103,9 +104,7 @@ if __name__ == "__main__":
     print(f"⏱️ 開始執行：動態軌跡模型 時間平移抗性測試 (Time Shift Robustness)")
     print(f"{'='*75}")
     
-    X_train_raw, y_train_raw = load_sensor_data(os.path.join(BASE_PATH, 'training'))
-    X_val_raw, y_val_raw = load_sensor_data(os.path.join(BASE_PATH, 'validation'))
-    X_test_raw, y_test_raw = load_sensor_data(os.path.join(BASE_PATH, 'test'))
+    (X_train_raw, y_train_raw), (X_val_raw, y_val_raw), (X_test_raw, y_test_raw) = load_split_dataset(BASE_PATH)
     
     encoder = LabelEncoder()
     encoder.fit(y_train_raw)

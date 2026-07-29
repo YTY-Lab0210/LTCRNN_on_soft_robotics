@@ -9,6 +9,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 from keras.utils import to_categorical
 import tempfile
 import seaborn as sns  # 🌟 新增這行：強大的統計視覺化套件
+from dataset_loader_3ch import DEFAULT_DATASET_PATH, load_split_dataset, zscore_from_train
 
 # 讓終端機保持乾淨，消除不必要的警告
 os.environ['MPLCONFIGDIR'] = tempfile.gettempdir()
@@ -17,7 +18,7 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 # ================= 1. 全局設定 =================
 TARGET_LINES = 400
-BASE_PATH = r'C:\Users\HAO\Desktop\YTY_from_macbook\dataset_xx2020_new_new_new\dataset_602020_zscore' 
+BASE_PATH = DEFAULT_DATASET_PATH
 
 # 你的參賽選手
 model_configs = ['1D-CNN', 'SimpleRNN-8', 'LSTM-8', 'LTC-4']
@@ -99,9 +100,10 @@ if __name__ == "__main__":
     print(f"{'='*65}")
     
     # 載入完整數據 (Val 和 Test 永遠不動)
-    X_train_full, y_train_full_raw = load_sensor_data(os.path.join(BASE_PATH, 'training'))
-    X_val_raw, y_val_raw = load_sensor_data(os.path.join(BASE_PATH, 'validation'))
-    X_test_raw, y_test_raw = load_sensor_data(os.path.join(BASE_PATH, 'test'))
+    (X_train_full, y_train_full_raw), (X_val_raw, y_val_raw), (X_test_raw, y_test_raw) = load_split_dataset(
+        BASE_PATH,
+        normalize=False,
+    )
     
     encoder = LabelEncoder()
     encoder.fit(y_train_full_raw)
@@ -131,6 +133,11 @@ if __name__ == "__main__":
                 y_train_sub = to_categorical(encoder.transform(y_train_sub_raw), num_classes)
                 y_val = to_categorical(encoder.transform(y_val_raw), num_classes)
                 y_test = to_categorical(encoder.transform(y_test_raw), num_classes)
+                X_train_sub, X_val_scaled, X_test_scaled, _, _ = zscore_from_train(
+                    X_train_sub_raw,
+                    X_val_raw,
+                    X_test_raw,
+                )
 
                 # 🔑 3. 動態建立模型
                 if name == '1D-CNN':
@@ -173,16 +180,16 @@ if __name__ == "__main__":
                 
                 # 執行訓練 (注意：Y 放的是 y_train_sub)
                 history = model.fit(
-                    X_train_sub_raw, y_train_sub, 
+                    X_train_sub, y_train_sub,
                     epochs=2000,
                     batch_size=current_batch_size, 
-                    validation_data=(X_val_raw, y_val),
+                    validation_data=(X_val_scaled, y_val),
                     callbacks=[early_stopping],
                     verbose=0 
                 )
                 
                 # 最終評估
-                loss, accuracy = model.evaluate(X_test_raw, y_test, verbose=0)
+                loss, accuracy = model.evaluate(X_test_scaled, y_test, verbose=0)
                 
                 all_results[name][size].append(accuracy * 100)
                 print(f"Acc: {accuracy*100:>5.2f}%")
