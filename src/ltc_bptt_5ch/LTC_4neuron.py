@@ -184,7 +184,7 @@ if __name__ == "__main__":
     print(f"dense_b range: {np.min(dense_b_np):>8.4f}  to  {np.max(dense_b_np):>8.4f}")
     
     print("\n" + "="*80)
-    print("🐍 Python 陣列格式 (Float32，可直接複製貼上至 GA)：")
+    print("🐍 Python 陣列格式 (Float32，可直接保存或匯出)：")
     print("="*80)
 
     # 移除原本的四捨五入，將矩陣展平並強制轉型為 float32
@@ -205,7 +205,7 @@ if __name__ == "__main__":
     all_weights_1d = w_list + r_list + mu_list + dense_w_list + dense_b_list
     
     print("="*80)
-    print("🚀 [GA 微調專用錨點] 110 個參數的一維 Float32 完整陣列")
-    print("請將以下這整行直接複製到你的 GA 程式碼中作為初始中心點：")
+    print("🚀 [模型參數匯出] 110 個參數的一維 Float32 完整陣列")
+    print("請將以下這整行保存為模型參數匯出參考：")
     print("="*80)
     print(f"best_bptt_weights_1d = np.array({all_weights_1d}, dtype=np.float32)")

@@ -14,8 +14,6 @@ data/
 src/
   ltc_bptt_5ch/                   LTC-RNN training, benchmark, few-shot, and deployment export scripts
   ltc_bptt_3ch/                   3-channel LTC-RNN experiments
-  ga_5ch/                         Genetic algorithm and hybrid optimization scripts for 5-channel experiments
-  ga_3ch/                         Genetic algorithm and hybrid optimization scripts for 3-channel experiments
   baselines/
     vanillarnn/                   Vanilla RNN baseline scripts
     lstm/                         LSTM baseline scripts

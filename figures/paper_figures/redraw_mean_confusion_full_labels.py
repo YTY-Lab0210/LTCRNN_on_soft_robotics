@@ -7,23 +7,15 @@ import pandas as pd
 
 ROOT = Path(r"C:\Users\HAO\Desktop\YTY_from_macbook")
 OUT_DIR = Path(__file__).resolve().parent
+SOURCE_TABLE_DIR = OUT_DIR / "source_tables"
 
 CSV_5CH = (
-    ROOT
-    / "LTCRNN"
-    / "GA"
-    / "outputs"
-    / "LTC4_BPTT_ES200_MaxEpoch2000_GA_TrainFit_ConstrainedValSelect_eps0p005_Restart3_Run50"
-    / "LTC4_BPTT_ES200_MaxEpoch2000_GA_TrainFit_ConstrainedValSelect_eps0p005_Restart3_Run50_ConfusionMatrices.csv"
+    SOURCE_TABLE_DIR
+    / "ltc4_bptt_5ch_confusion_matrices.csv"
 )
 CSV_3CH = (
-    ROOT
-    / "LTCRNN"
-    / "finger_3"
-    / "GA"
-    / "outputs"
-    / "LTC4_3CH_BPTT_ES200_MaxEpoch2000_GA_TrainFit_ConstrainedValSelect_eps0p005_Restart3_Run50"
-    / "LTC4_3CH_BPTT_ES200_MaxEpoch2000_GA_TrainFit_ConstrainedValSelect_eps0p005_Restart3_Run50_ConfusionMatrices.csv"
+    SOURCE_TABLE_DIR
+    / "ltc4_bptt_3ch_confusion_matrices.csv"
 )
 
 METHOD = "BPTT checkpoint"

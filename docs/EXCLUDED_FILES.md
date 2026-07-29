@@ -11,7 +11,7 @@ _unused_datasets_backup_20260717/   Old dataset backups
 __pycache__/                        Python bytecode caches
 private thesis/front-matter PDFs    Signed review, authorization, and approval documents
 teacher paper draft files           Internal draft material
-large GA output folders             Heavy generated experiment outputs
+large generated output folders      Heavy intermediate experiment outputs
 ```
 
 The repository keeps the scripts and compact result summaries needed to understand or reproduce the experiments, while avoiding private documents and large intermediate outputs.

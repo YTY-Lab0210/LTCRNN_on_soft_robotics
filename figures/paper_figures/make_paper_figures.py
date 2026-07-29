@@ -15,15 +15,11 @@ PATHS = {
     "few_3ch": ROOT / "LTCRNN" / "finger_3" / "BPTT" / "Few_Shot_Raw_Data.csv",
     "shift_5ch": ROOT / "LTCRNN" / "BPTT" / "csv" / "TimeShift_Robustness_Raw_Data.csv",
     "shift_3ch": ROOT / "LTCRNN" / "finger_3" / "BPTT" / "TimeShift_Robustness_Raw_Data.csv",
-    "ga_static": ROOT / "LTCRNN" / "LTCRNN" / "GA" / "different_mutation_rate" / "Boxplot_Results.csv",
-    "ga_dynamic": ROOT / "LTCRNN" / "LTCRNN" / "GA" / "different_mutation_rate" / "Boxplot_Results_DynamicMu.csv",
 }
 
 SERIES = {
     "5ch": "#1f77b4",
     "3ch": "#d62728",
-    "GA static": "#7f7f7f",
-    "GA dynamic": "#2ca02c",
 }
 
 
@@ -157,36 +153,12 @@ def plot_time_shift_ltc4():
     return save(fig, "paper_ltc4_time_shift_mean_line_5ch_3ch.png")
 
 
-def plot_pure_ga_ltc123():
-    df_static = pd.read_csv(PATHS["ga_static"])
-    df_dynamic = pd.read_csv(PATHS["ga_dynamic"])
-    models = ["LTC-1", "LTC-2", "LTC-3"]
-    y_static = [df_static[m].mean() for m in models]
-    y_dynamic = [df_dynamic[m].mean() for m in models]
-    xs = np.arange(len(models))
-
-    fig, ax = plt.subplots(figsize=(9.2, 5.2))
-    ax.plot(xs, y_static, marker="o", linewidth=2.7, markersize=8, label="fixed mutation", color=SERIES["GA static"])
-    ax.plot(xs, y_dynamic, marker="s", linewidth=2.7, markersize=8, label="dynamic mutation", color=SERIES["GA dynamic"])
-    for x, y in zip(xs, y_static):
-        ax.text(x, y - 1.6, f"{y:.1f}", ha="center", va="top", fontsize=10)
-    for x, y in zip(xs, y_dynamic):
-        ax.text(x, y + 1.3, f"{y:.1f}", ha="center", va="bottom", fontsize=10)
-    ax.set_xticks(xs)
-    ax.set_xticklabels(models)
-    ax.set_title("Pure GA Preliminary Mean Accuracy", fontsize=16, pad=14)
-    style_axes(ax, (55, 85))
-    ax.legend(frameon=False, loc="lower right", fontsize=11)
-    return save(fig, "paper_pure_ga_ltc123_preliminary_line.png")
-
-
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     outputs = [
         plot_benchmark(),
         plot_few_shot_ltc4(),
         plot_time_shift_ltc4(),
-        plot_pure_ga_ltc123(),
     ]
     for path in outputs:
         print(path)

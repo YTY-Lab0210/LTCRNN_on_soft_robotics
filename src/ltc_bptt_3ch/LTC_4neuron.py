@@ -205,6 +205,6 @@ if __name__ == "__main__":
     
     print("="*80)
     print("🚀 [終極殺招專用] 110 個參數的一維完整陣列 (純整數乾淨版)")
-    print("請將以下這整行直接複製到你的 GA 程式碼中作為基準中心點：")
+    print("請將以下這整行保存為模型參數匯出參考：")
     print("="*80)
     print(f"best_bptt_weights_1d = np.array({all_weights_1d})")
