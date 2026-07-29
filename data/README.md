@@ -12,6 +12,24 @@ This is the renamed raw ADC dataset. File names use the display labels used in t
 
 Each CSV file is a 5-channel time-series recording from flex sensors mounted on the soft robotic hand.
 
+The 3-channel version is:
+
+```text
+dataset_new_new_new_3ch/
+```
+
+This version keeps:
+
+```text
+Time_ms, Thumb, Middle, Pinky
+```
+
+Files in the 3-channel version were randomly renumbered within each class using seed `20260729`. The source-to-output mapping is recorded in:
+
+```text
+dataset_new_new_new_3ch_manifest.csv
+```
+
 ## File Naming
 
 Example:
@@ -58,4 +76,8 @@ src/utils/z_score.py
 
 The 5-channel setting uses all five flex sensors.
 
-The 3-channel experiments use a reduced sensor subset, implemented in the corresponding 3-channel experiment scripts.
+The 3-channel dataset uses the same reduced sensor subset as the 3-channel experiment scripts:
+
+```text
+Thumb, Middle, Pinky
+```

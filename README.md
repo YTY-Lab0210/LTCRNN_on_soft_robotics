@@ -9,6 +9,7 @@ The project focuses on flex-sensor time-series signals collected from a five-fin
 ```text
 data/
   dataset_new_new_new/            Main renamed 10-class raw dataset
+  dataset_new_new_new_3ch/        Randomly renumbered 3-channel raw dataset
 
 src/
   ltc_bptt_5ch/                   LTC-RNN training, benchmark, few-shot, and deployment export scripts
@@ -43,6 +44,18 @@ data/dataset_new_new_new/
 It contains the renamed raw ADC sequences using the same display labels as the confusion-matrix figures, such as `Baseball`, `Bottle`, `Sponge Dice`, and `3D-Printed Part`.
 
 The current dataset has 999 CSV files: 99 `Baseball` samples and 100 samples for each of the other nine classes. See `data/README.md` for the full class list and counts.
+
+A 3-channel version is also provided:
+
+```text
+data/dataset_new_new_new_3ch/
+```
+
+This version keeps `Time_ms`, `Thumb`, `Middle`, and `Pinky`, then randomly renumbers files within each class. The source-to-output mapping is stored in:
+
+```text
+data/dataset_new_new_new_3ch_manifest.csv
+```
 
 ## Python Setup
 
