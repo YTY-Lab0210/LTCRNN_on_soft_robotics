@@ -25,7 +25,6 @@ Thumb, Index, Middle, Ring, Pinky
 | `LTC_4neuron.py` | 單獨訓練 LTC-4，並印出模型參數與訓練曲線 |
 | `LTC_8neuron.py` | 單獨訓練 LTC-8 |
 | `LTC_everyneuron_boxplot.py` | 早期 LTC 不同神經元數比較與 boxplot |
-| `plot_ltc_interpretability.py` | LTC 參數與模型行為的解釋性視覺化 |
 | `run_training_curve.py` | 產生模型訓練過程曲線 |
 
 ## 繪圖程式
