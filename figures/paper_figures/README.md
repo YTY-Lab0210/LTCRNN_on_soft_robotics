@@ -21,7 +21,6 @@
 | 檔案 | 用途 |
 | --- | --- |
 | `make_single_finger_waveform.py` | 產生單指抓握 ADC 波形圖 |
-| `make_schematic_single_finger_waveform.py` | 產生示意型單指抓握波形圖 |
 | `remove_flex_sensor_background.py` | flex sensor 圖片去背 |
 | `remove_soft_finger_background.py` | 軟式手指圖片去背 |
 
@@ -42,4 +41,3 @@
 | `paper_confusion_no_numbers_5ch_3ch_ids.png` | 小尺寸 confusion matrix，用 class id 顯示 |
 | `ltc_neuron_sweep_5ch_3ch_bar.png` | LTC neuron number sweep |
 | `model_parameter_count_bar.png` | 模型參數量比較 |
-| `schematic_single_finger_waveform.png` | 單指抓握波形示意 |

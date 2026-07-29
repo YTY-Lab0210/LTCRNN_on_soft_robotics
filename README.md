@@ -33,10 +33,6 @@
 
 軟式手指在抓握物體時會產生彎曲變形，flex sensor 將變形轉換成 ADC 數值。不同物件的形狀、尺寸、硬度與接觸位置不同，因此五根手指的彎曲序列會形成不同的觸覺特徵。
 
-<p align="center">
-  <img src="figures/paper_figures/schematic_single_finger_waveform.png" width="520" alt="Single finger waveform">
-</p>
-
 每筆資料為 400 個取樣點，取樣週期為 10 ms，總長約 4 s。CSV 檔含有 `Time_ms` 與各手指 ADC 欄位。
 
 ## 資料集
