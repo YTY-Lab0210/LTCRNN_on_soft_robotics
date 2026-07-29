@@ -8,7 +8,6 @@
 | `split_data.py` | 將資料切成 training / validation / test 的輔助工具 |
 | `z_score.py` | 對資料做 z-score normalization 的工具 |
 | `minmax.py` | 對資料做 min-max normalization 的工具 |
-| `test_slow.py` | 早期測試或除錯用的小工具 |
 
 ## 目前最常用的工具
 

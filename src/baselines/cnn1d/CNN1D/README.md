@@ -5,7 +5,6 @@
 | 檔案 | 用途 |
 | --- | --- |
 | `cnn_1d.py` | 訓練基本 1D-CNN sequence classifier |
-| `cnn_1d_add_noise.py` | 測試加入雜訊後 1D-CNN 的分類表現 |
 | `cnn_1d_earlystopping_comparison.py` | 比較 early stopping 對 1D-CNN 訓練的影響 |
 | `cnn_1d_reduce_trainingset.py` | 測試減少 training samples 時 1D-CNN 的表現 |
 | `loss.py` | 繪製或分析 loss curve |

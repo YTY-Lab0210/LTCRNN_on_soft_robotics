@@ -28,18 +28,6 @@ Thumb, Index, Middle, Ring, Pinky
 | `plot_ltc_interpretability.py` | LTC 參數與模型行為的解釋性視覺化 |
 | `run_training_curve.py` | 產生模型訓練過程曲線 |
 
-## Robustness / Ablation 程式
-
-| 檔案 | 用途 |
-| --- | --- |
-| `ablation_zscore.py` | 比較 z-score 前處理對訓練表現的影響 |
-| `run_data_missing.py` | 測試資料缺失或感測訊號缺漏時的模型表現 |
-| `run_ltc_loss_packet_bptt.py` | packet loss 條件下的 LTC-RNN 測試 |
-| `run_benchmark_loss_bptt.py` | 額外 benchmark / solver robustness 測試 |
-| `run_snr.py` | 訊雜比測試 |
-| `run_snr_trainingset.py` | 訓練資料集加入雜訊後的 SNR 測試 |
-| `run_snr_trainingset_expand.py` | 擴充版 SNR training-set 測試 |
-
 ## 繪圖程式
 
 | 檔案 | 用途 |
@@ -47,7 +35,6 @@ Thumb, Index, Middle, Ring, Pinky
 | `draw_from_csv.py` | 從 CSV 結果重畫圖 |
 | `draw_benchmark_constraint.py` | 繪製 benchmark / constraint 結果 |
 | `draw_few_data_boxplot.py` | 繪製 few-shot boxplot |
-| `draw_time_shift.py` | 繪製 time-shift robustness 圖 |
 | `draw_training_curve.py` | 繪製訓練曲線 |
 | `repair_few_shot_10_60_csv.py` | 修補 few-shot CSV 格式，供後續 paper figure 腳本使用 |
 
@@ -55,8 +42,8 @@ Thumb, Index, Middle, Ring, Pinky
 
 | 資料夾 | 內容 |
 | --- | --- |
-| `csv/` | benchmark、few-shot、packet loss、time-warping 等實驗 CSV |
-| `diagram/` | 早期產生的圖表輸出 |
+| `csv/` | benchmark、few-shot 與主要模型比較的 CSV |
+| `diagram/` | 早期與主要模型比較相關的圖表輸出 |
 
 ## 注意
 

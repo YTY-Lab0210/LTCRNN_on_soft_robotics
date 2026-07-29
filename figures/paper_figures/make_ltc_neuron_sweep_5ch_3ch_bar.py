@@ -6,8 +6,7 @@ import pandas as pd
 from matplotlib.patches import Patch
 
 
-ROOT = Path(r"C:\Users\HAO\Desktop\YTY_from_macbook")
-OUT_DIR = ROOT / "\u8ad6\u6587" / "paper_figures"
+OUT_DIR = Path(__file__).resolve().parent
 SUMMARY_CSV = OUT_DIR / "ltc_neuron_sweep_5ch_3ch_summary.csv"
 OUT_PNG = OUT_DIR / "ltc_neuron_sweep_5ch_3ch_bar.png"
 OUT_SVG = OUT_DIR / "ltc_neuron_sweep_5ch_3ch_bar.svg"
