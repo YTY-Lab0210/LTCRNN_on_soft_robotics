@@ -273,7 +273,7 @@ src/
     vanillarnn/                   Vanilla RNN baseline
     lstm/                         LSTM baseline
     cnn1d/                        早期 1D-CNN baseline
-  utils/                          資料切分、z-score、min-max 與 dataset 工具
+  utils/                          資料切分、z-score 與 dataset 工具
 
 arduino/
   deployment_candidates/          Arduino Uno deployment sketches

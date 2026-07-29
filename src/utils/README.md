@@ -7,7 +7,6 @@
 | `create_3ch_dataset.py` | 從 5-channel raw CSV 產生 3-channel dataset，只保留 `Time_ms`, `Thumb`, `Middle`, `Pinky`，並在每類內隨機重新編號 |
 | `split_data.py` | 將資料切成 training / validation / test 的輔助工具 |
 | `z_score.py` | 對資料做 z-score normalization 的工具 |
-| `minmax.py` | 對資料做 min-max normalization 的工具 |
 
 ## 目前最常用的工具
 

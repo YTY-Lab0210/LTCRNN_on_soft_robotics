@@ -9,7 +9,7 @@
 | `ltc_bptt_5ch/` | 5-channel 主實驗，包含 LTC-RNN、Vanilla RNN、LSTM benchmark、few-shot、部署候選模型與 Arduino 匯出 |
 | `ltc_bptt_3ch/` | 3-channel 主實驗，預設讀取 `data/dataset_new_new_new_3ch` |
 | `baselines/` | 早期 baseline 模型程式，包含 Vanilla RNN、LSTM、1D-CNN |
-| `utils/` | 資料集整理、3-channel dataset 產生、z-score、min-max 與資料切分工具 |
+| `utils/` | 資料集整理、3-channel dataset 產生、z-score 與資料切分工具 |
 
 ## 建議閱讀順序
 
