@@ -1,4 +1,4 @@
-"""Tests that do not require an Arduino, relay board, or camera."""
+"""Tests that do not require an Arduino or relay board."""
 
 from __future__ import annotations
 

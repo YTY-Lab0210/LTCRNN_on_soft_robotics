@@ -263,7 +263,7 @@ arduino/README.md
 experiment_tools/
 ```
 
-內容包含 5-channel flex sensor 資料收集、單通道 flex ADC 讀取、flex resistance 量測、relay 測試、FSR 讀取、camera/flex angle recording，以及對應的 Python parser 測試。詳細使用方式請見：
+內容包含 5-channel flex sensor 資料收集、單通道 flex ADC 讀取、flex resistance 量測、relay 測試，以及對應的 Python parser 測試。詳細使用方式請見：
 
 ```text
 experiment_tools/README.md
