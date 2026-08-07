@@ -16,7 +16,6 @@ from serial_utils import (  # noqa: E402
     parse_flex_resistance,
     parse_three_adc,
 )
-from collect_drop_timing import parse_metric  # noqa: E402
 
 
 class ParserTests(unittest.TestCase):
@@ -36,11 +35,6 @@ class ParserTests(unittest.TestCase):
     def test_three_adc(self) -> None:
         self.assertEqual(parse_three_adc("100,200,300"), (100, 200, 300))
         self.assertIsNone(parse_three_adc("100,broken,300"))
-
-    def test_drop_metric(self) -> None:
-        self.assertEqual(parse_metric("1. Speed (Delta AB) : 150"), ("delta_ab_ms", 150))
-        self.assertEqual(parse_metric("Catch Delay: 42"), ("catch_delay_ms", 42))
-        self.assertIsNone(parse_metric("unrelated log line"))
 
 
 if __name__ == "__main__":

@@ -11,7 +11,6 @@
 | 單一 flex ADC stream | `arduino/flex_adc/flex_adc.ino` | `python/read_flex_adc.py` |
 | 單一 flex 電阻值 | `arduino/flex_resistance/flex_resistance.ino` | `python/collect_flex_resistance.py` |
 | 五路 relay 循環測試 | `arduino/relay_test/relay_test.ino` | 不需要 |
-| Drop/catch 文字紀錄解析 | 使用會輸出對應文字的實驗 firmware | `python/collect_drop_timing.py` |
 
 ## 安裝
 
