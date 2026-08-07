@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Experiment outputs are local by default.
+output/
+*.csv
+*.mp4
+
+.DS_Store
+

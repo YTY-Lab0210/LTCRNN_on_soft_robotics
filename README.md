@@ -255,9 +255,26 @@ Arduino GND 需要與繼電器控制端 GND 共地。
 arduino/README.md
 ```
 
+## Experiment tools
+
+實驗資料收集、Arduino 測試與感測器錄製工具已整理於：
+
+```text
+experiment_tools/
+```
+
+內容包含 5-channel flex sensor 資料收集、單通道 flex ADC 讀取、flex resistance 量測、relay 測試、FSR 讀取、camera/flex angle recording，以及對應的 Python parser 測試。詳細使用方式請見：
+
+```text
+experiment_tools/README.md
+UPLOAD_INSTRUCTIONS.md
+```
+
 ## Repository Structure
 
 ```text
+experiment_tools/                 實驗資料收集、Arduino 測試與感測器錄製工具
+
 data/
   dataset_new_new_new/            10 類 5-channel raw ADC dataset
   dataset_new_new_new_3ch/        10 類 3-channel raw ADC dataset
