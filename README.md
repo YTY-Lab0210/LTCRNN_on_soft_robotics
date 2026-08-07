@@ -1,51 +1,51 @@
-# 基於液態時間常數網路之輕量化觸覺辨識架構於軟式機器人應用
+# Lightweight Tactile Object Recognition for Soft Robotic Hands via LTC-RNN
 
-本專案整理了以五指仿人軟式機械手進行觸覺物件辨識的資料集、訓練程式、圖表腳本，以及 Arduino Uno 端的部署程式。研究核心是使用手指上的 flex sensor 取得抓握時的彎曲時間序列，並以 Liquid Time-Constant RNN, LTC-RNN 進行輕量化分類。
+This repository contains the dataset, training scripts, figure-generation utilities, and Arduino deployment code for lightweight tactile object recognition with a five-finger soft robotic hand. The project uses flex-sensor time-series signals collected during grasping and classifies object categories with Liquid Time-Constant Recurrent Neural Networks (LTC-RNNs).
 
-相較於只把模型放在電腦端推論，本專案也保留了 Arduino 端測試流程：可以從序列監控視窗送出指令、控制繼電器啟動抓握、收集 400-step 感測資料，並在板子上執行 LTC-4 inference。
+In addition to desktop-side model training and evaluation, this repository includes Arduino Uno inference sketches. The Arduino workflow can trigger a grasp through relay outputs, collect a 400-step flex-sensor window, run z-score normalization, perform LTC-4 Euler updates, and print the predicted object class.
 
-## 研究流程
+## Research Pipeline
 
 ```text
-五指軟式機械手
-  -> flex sensor 量測手指彎曲
-  -> 400-step ADC 時間序列
+Five-finger soft robotic hand
+  -> Flex-sensor bending measurement
+  -> 400-step ADC time series
   -> z-score normalization
   -> LTC-RNN / Vanilla RNN / LSTM
-  -> 物件分類與 on-board inference 測試
+  -> Object classification and on-board inference tests
 ```
 
-本專案目前主要比較兩種輸入設定：
+Two sensing configurations are compared:
 
 ```text
 5-channel: Thumb, Index, Middle, Ring, Pinky
 3-channel: Thumb, Middle, Pinky
 ```
 
-5-channel 用於保留五指完整感測資訊；3-channel 用於評估在較少感測器輸入下，模型是否仍能維持可用辨識能力。
+The 5-channel setting keeps the full finger-sensing information, while the 3-channel setting evaluates whether reduced sensor input can still preserve usable recognition performance.
 
-## 硬體與感測示意
+## Hardware and Sensing Overview
 
 <p align="center">
   <img src="figures/paper_figures/soft_finger_cutout.png" height="120" alt="Soft finger">
   <img src="figures/paper_figures/flex_sensor_cutout.png" height="120" alt="Flex sensor">
 </p>
 
-軟式手指在抓握物體時會產生彎曲變形，flex sensor 將變形轉換成 ADC 數值。不同物件的形狀、尺寸、硬度與接觸位置不同，因此五根手指的彎曲序列會形成不同的觸覺特徵。
+When a soft finger grasps an object, its deformation changes the flex-sensor ADC values. Different object shapes, sizes, stiffness levels, and contact locations produce distinct bending sequences across the fingers, forming tactile features for object recognition.
 
-每筆資料為 400 個取樣點，取樣週期為 10 ms，總長約 4 s。CSV 檔含有 `Time_ms` 與各手指 ADC 欄位。
+Each sample contains 400 time steps with a 10 ms sampling period, for an approximately 4 s grasping window. CSV files include `Time_ms` and finger-wise ADC columns.
 
-## 資料集
+## Dataset
 
-主要資料集位於：
+The main dataset is located at:
 
 ```text
 data/dataset_new_new_new/
 ```
 
-這是重新整理與命名後的 10 類 raw ADC dataset。每一類保留 100 筆有效資料，總共 1000 個 CSV 檔。
+It is a cleaned and renamed 10-class raw ADC dataset. Each class contains 100 valid samples, giving 1000 CSV files in total.
 
-物件類別如下：
+Object classes:
 
 ```text
 Baseball
@@ -60,7 +60,7 @@ Stuffed Ball
 3D-Printed Part
 ```
 
-5-channel CSV 欄位範例：
+Example 5-channel CSV format:
 
 ```text
 Time_ms,Thumb,Index,Middle,Ring,Pinky
@@ -69,20 +69,20 @@ Time_ms,Thumb,Index,Middle,Ring,Pinky
 20,738,727,754,716,793
 ```
 
-3-channel dataset 由 5-channel dataset 擷取 `Thumb`, `Middle`, `Pinky` 後重新編號而成：
+The 3-channel dataset is generated from the 5-channel dataset by keeping `Thumb`, `Middle`, and `Pinky`, then renumbering files within each class:
 
 ```text
 data/dataset_new_new_new_3ch/
 data/dataset_new_new_new_3ch_manifest.csv
 ```
 
-`dataset_new_new_new_3ch_manifest.csv` 紀錄每一筆 3-channel CSV 對應到原始 5-channel CSV 的來源。
+The manifest records the source 5-channel CSV corresponding to each 3-channel CSV.
 
-## 模型設定
+## Model Settings
 
-本專案主模型為 LTC-RNN。LTC-RNN 使用連續時間動態描述 hidden state，實作時透過 Euler method 離散化，因此適合處理 flex sensor 這類連續變化的時間序列訊號。
+The main model family is LTC-RNN. LTC-RNN describes hidden-state dynamics in continuous time and is implemented with Euler discretization, making it suitable for continuous flex-sensor time-series signals.
 
-主要模型與比較項目：
+Model configurations included in the experiments:
 
 ```text
 LTC-RNN: LTC-1, LTC-2, LTC-4, LTC-8, LTC-16
@@ -90,43 +90,43 @@ Vanilla RNN: 4, 8, 16 hidden units
 LSTM: 4, 8, 16 hidden units
 ```
 
-目前 Arduino deployment 以 LTC-4 為主要候選，原因是參數量較少，且能在辨識表現與 on-board inference 成本之間取得較好的平衡。
+The Arduino deployment focuses on LTC-4 because it provides a practical balance between recognition performance, parameter count, and on-board inference cost.
 
-## 實驗圖表
+## Paper Figures
 
-### LTC 神經元數量比較
+### LTC Neuron Sweep
 
 <p align="center">
   <img src="figures/paper_figures/ltc_neuron_sweep_5ch_3ch_bar.png" width="720" alt="LTC neuron sweep">
 </p>
 
-此圖用於比較 LTC-1, LTC-2, LTC-4, LTC-8, LTC-16 在 5-channel 與 3-channel 輸入下的辨識結果。重點不是只追求最大神經元數，而是觀察模型複雜度增加後，表現是否仍有明顯提升。
+This figure compares LTC-1, LTC-2, LTC-4, LTC-8, and LTC-16 under 5-channel and 3-channel inputs. The goal is not only to maximize neuron count, but also to observe whether additional model complexity still provides meaningful performance gains.
 
-### 模型 benchmark
+### Model Benchmark
 
 <p align="center">
   <img src="figures/paper_figures/paper_benchmark_accuracy_f1_compact.png" width="850" alt="Benchmark accuracy and macro-F1">
 </p>
 
-此圖將 Vanilla RNN、LSTM 與 LTC 放在同一張圖中，以 Accuracy 與 Macro-F1 比較 3-channel 與 5-channel 表現。Macro-F1 用於觀察各類別平均表現，避免只看 overall accuracy 而忽略類別不均或特定類別混淆。
+This figure compares Vanilla RNN, LSTM, and LTC models using Accuracy and Macro-F1 under 3-channel and 5-channel settings. Macro-F1 is included to reflect class-wise performance rather than relying only on overall accuracy.
 
-### Few-shot 訓練樣本數分析
+### Few-Shot Training Sample Analysis
 
 <p align="center">
   <img src="figures/paper_figures/few_shot_10_60/paper_ltc4_few_shot_10_60_accuracy.png" width="560" alt="Few-shot accuracy">
 </p>
 
-此圖觀察每類訓練樣本數從 10, 20, 30, 40, 50 到 60 筆時，5-channel 與 3-channel 的 LTC-4 表現變化。用途是說明模型在 limited data 條件下的資料效率。
+This figure evaluates LTC-4 performance as the number of training samples per object changes from 10 to 60. It is used to discuss data efficiency under limited-data conditions.
 
-### Confusion matrix
+### Confusion Matrix
 
 <p align="center">
   <img src="figures/paper_figures/paper_confusion_no_numbers_5ch_3ch_ids.png" width="760" alt="Confusion matrix">
 </p>
 
-Confusion matrix 使用 row-normalized percentage 呈現。深色對角線代表該類別被正確分類的比例較高；非對角線顏色則可用來觀察哪些物件容易互相混淆。
+The confusion matrices are row-normalized. Dark diagonal cells indicate higher correct classification ratios, while off-diagonal cells show which object categories are more easily confused.
 
-完整類別標籤版本也保留於：
+Full-label versions are also kept at:
 
 ```text
 figures/paper_figures/paper_confusion_no_numbers_5ch_3ch.png
@@ -134,17 +134,17 @@ figures/paper_figures/bptt_mean_confusion_5ch.png
 figures/paper_figures/bptt_mean_confusion_3ch.png
 ```
 
-### 參數量比較
+### Parameter Count Comparison
 
 <p align="center">
   <img src="figures/paper_figures/model_parameter_count_bar.png" width="620" alt="Model parameter count">
 </p>
 
-此圖用於說明 LTC-4 相較於 Vanilla RNN-8 與 LSTM-8 的模型參數量較少，適合作為 microcontroller 端部署候選。
+This figure compares the parameter count of LTC-4 with Vanilla RNN-8 and LSTM-8, showing why LTC-4 is a practical candidate for microcontroller deployment.
 
-## 主要程式入口
+## Main Entry Points
 
-Python 訓練與分析腳本：
+Training and analysis scripts:
 
 ```text
 src/ltc_bptt_5ch/run_extended_rnn_lstm_ltc_benchmark.py
@@ -153,7 +153,7 @@ src/ltc_bptt_5ch/run_deployment_candidates.py
 src/ltc_bptt_3ch/run_ltc_neuron_sweep_3ch.py
 ```
 
-資料前處理與 dataset 工具：
+Dataset preprocessing utilities:
 
 ```text
 src/utils/z_score.py
@@ -161,7 +161,7 @@ src/utils/create_3ch_dataset.py
 src/utils/split_data.py
 ```
 
-圖表產生腳本：
+Figure-generation scripts:
 
 ```text
 figures/paper_figures/make_paper_compact_figures.py
@@ -171,15 +171,15 @@ figures/paper_figures/make_ltc_neuron_sweep_5ch_3ch_bar.py
 figures/paper_figures/make_model_parameter_bar.py
 ```
 
-## Python 環境
+## Python Environment
 
-建議先建立 Python virtual environment，再安裝依賴套件：
+Create a Python virtual environment and install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-主要套件包含：
+Main packages:
 
 ```text
 TensorFlow / Keras
@@ -192,24 +192,24 @@ SciPy
 Numba
 ```
 
-## Arduino Uno 部署
+## Arduino Uno Deployment
 
-Arduino 程式位於：
+Arduino sketches are located at:
 
 ```text
 arduino/deployment_candidates/
 ```
 
-LTC-4 有兩個繼電器觸發版本：
+LTC-4 relay-control variants:
 
 ```text
 arduino/deployment_candidates/ltc4_best_low_active/ltc4_best_low_active.ino
 arduino/deployment_candidates/ltc4_best_high_active/ltc4_best_high_active.ino
 ```
 
-如果繼電器輸入腳位為 `LOW` 時作動，使用 low-active 版本；如果輸入腳位為 `HIGH` 時作動，使用 high-active 版本。
+Use the low-active version when the relay input is active at `LOW`; use the high-active version when the relay input is active at `HIGH`.
 
-Arduino 腳位設定：
+Arduino pin assignment:
 
 ```text
 Flex sensor analog input: A0, A1, A2, A3, A4
@@ -217,53 +217,57 @@ Relay control output:     D2, D3, D4, D5, D6
 Serial baud rate:         115200
 ```
 
-序列監控指令：
+Serial Monitor commands:
 
 ```text
-g  開始一次 400-sample grasp window
-r  釋放所有繼電器
-b  使用 flash-stored 400-sample window 做 inference benchmark
-t  顯示單次 task-level timing breakdown
-m  重複 flash benchmark 100 次
-d  重複 timing breakdown 100 次
+g  Start one 400-sample grasp window
+r  Release all relays
+b  Run inference benchmark on a flash-stored 400-sample window
+t  Print one task-level timing breakdown
+m  Repeat the flash benchmark 100 times
+d  Repeat the timing breakdown 100 times
 ```
 
-`g` 指令流程：
+`g` command flow:
 
 ```text
-1. 開始每 10 ms 讀取一次 flex sensor
-2. 前 1.5 s 保留為抓握前 baseline / pre-grasp 訊號
-3. 1.5 s 後啟動五個繼電器開始抓握
-4. 收滿 400 點後執行 z-score normalization
-5. 在 Arduino Uno 上執行 LTC-4 Euler update 與 dense + softmax
-6. 印出 predicted class、confidence 與各類別機率
-7. 關閉繼電器並釋放
+Enter g
+  -> sample flex sensors every 10 ms
+  -> keep the first 1.5 s as the pre-grasp baseline period
+  -> activate five relays after 1.5 s to start grasping
+  -> collect 400 samples
+  -> run z-score normalization
+  -> run LTC-4 Euler updates
+  -> run dense layer and softmax
+  -> print the predicted class and confidence
+  -> turn off relays and release
 ```
 
-硬體接線提醒：
+Hardware safety note:
 
 ```text
-Arduino 只負責低壓控制訊號與 flex sensor 分壓讀值。
-繼電器模組需要自己的合適 DC 供電。
-Arduino GND 需要與繼電器控制端 GND 共地。
-泵浦、電磁閥與 110 V 電源側應與 Arduino 邏輯側保持隔離。
+Arduino analog pins -> flex-sensor voltage-divider outputs
+Arduino digital pins -> relay module input pins
+Arduino GND -> relay control-side GND
 ```
 
-更詳細說明請見：
+The Arduino only handles low-voltage control signals. The relay module needs an appropriate DC supply. The pump, solenoid valve, and 110 V load side must not be connected directly to Arduino logic pins; the high-voltage side should remain isolated and controlled only through relay contacts.
+
+See also:
 
 ```text
 arduino/README.md
 ```
 
-## Experiment tools
+## Experiment Tools
 
-實驗資料收集、Arduino 測試與感測器錄製工具已整理於：
+Experiment data-collection and relay-test utilities are located at:
 
 ```text
 experiment_tools/
 ```
 
-內容包含 5-channel flex sensor 資料收集、單通道 flex ADC 讀取、flex resistance 量測、relay 測試，以及對應的 Python parser 測試。詳細使用方式請見：
+The folder includes 5-channel flex-sensor data collection, single-channel flex ADC reading, flex-resistance measurement, relay testing, and parser tests. Usage details are provided in:
 
 ```text
 experiment_tools/README.md
@@ -273,41 +277,29 @@ UPLOAD_INSTRUCTIONS.md
 ## Repository Structure
 
 ```text
-experiment_tools/                 實驗資料收集、Arduino 測試與感測器錄製工具
+experiment_tools/                 Data collection, Arduino tests, and sensor tools
 
 data/
-  dataset_new_new_new/            10 類 5-channel raw ADC dataset
-  dataset_new_new_new_3ch/        10 類 3-channel raw ADC dataset
+  dataset_new_new_new/            10-class 5-channel raw ADC dataset
+  dataset_new_new_new_3ch/        10-class 3-channel raw ADC dataset
 
 src/
-  ltc_bptt_5ch/                   5-channel LTC-RNN 訓練、benchmark、few-shot、部署匯出
-  ltc_bptt_3ch/                   3-channel LTC-RNN 實驗
-  baselines/
-    vanillarnn/                   Vanilla RNN baseline
-    lstm/                         LSTM baseline
-    cnn1d/                        早期 1D-CNN baseline
-  utils/                          資料切分、z-score 與 dataset 工具
+  ltc_bptt_5ch/                   5-channel LTC-RNN training, benchmarks, few-shot tests, and deployment export
+  ltc_bptt_3ch/                   3-channel LTC-RNN experiments
+  baselines/                      Vanilla RNN, LSTM, and legacy 1D-CNN baselines
+  utils/                          Dataset conversion, z-score, and split utilities
 
 arduino/
   deployment_candidates/          Arduino Uno deployment sketches
-  ltc4_zscore_inference/          早期 LTC-4 z-score inference sketch
+  ltc4_zscore_inference/          Legacy LTC-4 z-score inference sketch
 
 figures/
-  paper_figures/                  論文與簡報使用的圖表、重畫腳本與精簡結果表
+  paper_figures/                  Paper figures, source tables, and figure scripts
 
 docs/
-  EXCLUDED_FILES.md               未放入 repo 的私有文件與大型中間檔說明
+  EXCLUDED_FILES.md               Files intentionally excluded from this public repository
 ```
 
-## 未納入此 repo 的內容
+## Excluded Files
 
-此 repository 已排除以下內容：
-
-```text
-舊資料集備份
-Python cache 與大型中間輸出
-口試與畢業簽核用私有 PDF
-老師 paper draft 與內部討論文件
-```
-
-本 repo 的目標是保留能理解、重跑、繪圖與部署的必要內容，同時避免放入私有文件與過大的中間檔案。
+This repository intentionally excludes private thesis/front-matter PDFs, teacher draft files, old temporary datasets, Python caches, virtual environments, large generated intermediate outputs, and local-only training checkpoints. The goal is to keep only the files needed to understand the data format, reproduce the main experiments, regenerate figures, and test Arduino deployment.

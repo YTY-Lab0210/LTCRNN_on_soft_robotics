@@ -1,20 +1,19 @@
-# Experiment tools
+# Experiment Tools
 
-本資料夾整理軟式機器人實驗使用的資料收集、感測器測試與 relay 測試程式。
-所有 Python 程式都移除了本機絕對路徑與固定 USB port；未指定 `--port` 時會嘗試自動尋找 Arduino。
+This folder contains data-collection, sensor-checking, and relay-test tools used in the soft robotic hand experiments. Python scripts avoid hard-coded local paths and fixed USB ports; if `--port` is omitted, they try to automatically detect an Arduino-like serial device.
 
-## 內容
+## Contents
 
-| 功能 | Arduino firmware | Python 程式 |
+| Function | Arduino firmware | Python script |
 |---|---|---|
-| 五指 flex sensor，100 Hz、400 點 | `arduino/flex_sensor_5ch/flex_sensor_5ch.ino` | `python/collect_flex_five_channel.py` |
-| 單一 flex ADC stream | `arduino/flex_adc/flex_adc.ino` | `python/read_flex_adc.py` |
-| 單一 flex 電阻值 | `arduino/flex_resistance/flex_resistance.ino` | `python/collect_flex_resistance.py` |
-| 五路 relay 循環測試 | `arduino/relay_test/relay_test.ino` | 不需要 |
+| Five-finger flex sensors, 100 Hz, 400 samples | `arduino/flex_sensor_5ch/flex_sensor_5ch.ino` | `python/collect_flex_five_channel.py` |
+| Single flex ADC stream | `arduino/flex_adc/flex_adc.ino` | `python/read_flex_adc.py` |
+| Single flex resistance measurement | `arduino/flex_resistance/flex_resistance.ino` | `python/collect_flex_resistance.py` |
+| Five-relay cycling test | `arduino/relay_test/relay_test.ino` | Not required |
 
-## 安裝
+## Installation
 
-在 repository 根目錄執行：
+Run from the repository root:
 
 ```bash
 python3 -m venv .venv
@@ -22,78 +21,72 @@ source .venv/bin/activate
 pip install -r experiment_tools/requirements.txt
 ```
 
-Windows 啟用虛擬環境：
+On Windows, activate the virtual environment with:
 
 ```powershell
-.venv\Scripts\activate
+.venv\Scriptsctivate
 ```
 
-列出可用 serial port：
+List available serial ports:
 
 ```bash
 python -m serial.tools.list_ports
 ```
 
-## 常用指令
+## Common Commands
 
-五指 flex sensor，每次收 400 點：
+Collect one 400-sample five-finger flex-sensor trial:
 
 ```bash
-python experiment_tools/python/collect_flex_five_channel.py \
-  --port /dev/cu.usbmodem101 \
-  --label bottle \
-  --samples 400
+python experiment_tools/python/collect_flex_five_channel.py   --port /dev/cu.usbmodem101   --label bottle   --samples 400
 ```
 
-如果只接一個 Arduino，通常可省略 `--port`：
+If only one Arduino is connected, `--port` can usually be omitted:
 
 ```bash
 python experiment_tools/python/collect_flex_five_channel.py --label bottle
 ```
 
-單一 flex sensor 電阻值：
+Collect single flex-sensor resistance values:
 
 ```bash
 python experiment_tools/python/collect_flex_resistance.py --port /dev/cu.usbmodem101
 ```
 
-只在終端機查看單一 flex ADC：
+View a single flex ADC stream in the terminal:
 
 ```bash
 python experiment_tools/python/read_flex_adc.py --port /dev/cu.usbmodem101
 ```
 
-所有產出預設放在執行位置的 `output/`，也可用 `--output-dir` 指定其他位置。
+Outputs are saved to `output/` by default. Use `--output-dir` to choose another location.
 
-## Relay 注意事項
+## Relay Notes
 
-`relay_test.ino` 預設 relay 為 active HIGH：
+`relay_test.ino` assumes an active-HIGH relay module by default:
 
 ```cpp
 const uint8_t RELAY_ON = HIGH;
 const uint8_t RELAY_OFF = LOW;
 ```
 
-若模組為 active LOW，請把兩個值對調。上電前先確認 relay 模組、泵浦與電磁閥的額定電壓；Arduino
-只負責低壓控制訊號，控制端需共地，高壓／110 V 電源側需保持隔離。
+If your relay module is active LOW, swap these two constants. Before powering the system, verify the voltage ratings of the relay module, pump, and solenoid valve. The Arduino should only handle low-voltage control signals; the relay control side must share ground with Arduino, while high-voltage or 110 V load wiring must remain isolated.
 
-## 測試
+## Tests
 
-不接硬體即可執行 parser 測試：
+Parser tests can be run without hardware:
 
 ```bash
 python -m unittest discover -s experiment_tools/tests -v
 ```
 
-Arduino 編譯檢查需要另行安裝 Arduino CLI 與對應 board core；實際接線前仍須確認板型、腳位與 relay
-active level。
+Arduino compilation checks require Arduino CLI and the relevant board core. Before running real hardware tests, confirm the board type, pin assignments, and relay active level.
 
-## 未打包內容
+## Not Included
 
-- CSV、MP4 與實驗資料集
-- `.venv`、Python cache 與 IDE 設定
-- 寫死的個人資料夾路徑與固定 USB port
-- 舊檔的重複版本
+- CSV files, MP4 files, and experimental datasets
+- `.venv`, Python cache, and IDE settings
+- Scripts with hard-coded personal paths or fixed USB ports
+- Duplicate legacy files
 
-整理來源包含原本的 `flex_sensor_data_collect.py`、`flex_data_single.py`、`read_flex.py`、
-Downloads 內的 data collector，以及 Documents/Arduino 內的 flex／resistance／relay sketches。
+Sources were consolidated from earlier flex-sensor data collectors, single-flex readers, resistance readers, and relay sketches.

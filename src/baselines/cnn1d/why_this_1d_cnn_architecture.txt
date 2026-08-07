@@ -1,0 +1,15 @@
+# Why This 1D-CNN Architecture Was Used
+
+A conventional multi-layer 1D-CNN can process time-series signals, but flattening long temporal feature maps after multiple convolutional layers can quickly create thousands or even tens of thousands of parameters. That design conflicts with the goal of lightweight edge deployment.
+
+For this reason, this project keeps a compact 1D-CNN baseline with Global Average Pooling. The architecture limits parameter growth while still providing a fair lightweight baseline against LTC-RNN.
+
+The key tensor transformation is:
+
+```text
+400 x 5 -> 396 x 8 -> 1 x 8 -> output classes
+```
+
+- `400 x 5 -> 396 x 8`: a 1D convolution with `kernel_size=5` and valid padding extracts eight temporal feature patterns.
+- `396 x 8 -> 1 x 8`: Global Average Pooling compresses the temporal dimension without introducing a large dense layer.
+- `1 x 8 -> output classes`: a compact dense layer performs classification with a small parameter count.

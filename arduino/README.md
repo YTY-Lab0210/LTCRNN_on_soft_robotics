@@ -1,83 +1,83 @@
-# Arduino Deployment 說明
+# Arduino Deployment
 
-本資料夾保存 Arduino Uno 端的 on-board inference 測試程式。主要目標是讓 Arduino 直接讀取 flex sensor、控制五個繼電器啟動抓握，並在板子上完成 LTC-4 推論。
+This folder contains Arduino Uno sketches for on-board inference. The main goal is to let Arduino read flex sensors, control five relays for grasping, and run LTC-4 inference directly on the board.
 
-## 腳位設定
+## Pin Assignment
 
-Flex sensor 類比輸入：
+Flex-sensor analog inputs:
 
 ```text
 A0, A1, A2, A3, A4
 ```
 
-Relay control 輸出腳：
+Relay control outputs:
 
 ```text
 D2, D3, D4, D5, D6
 ```
 
-Serial Monitor baud rate：
+Serial Monitor baud rate:
 
 ```text
 115200
 ```
 
-## LTC-4 繼電器版本
+## LTC-4 Relay Variants
 
-提供兩種版本，用來測試不同 relay module 的觸發邏輯：
+Two variants are provided for different relay-module trigger logic:
 
 ```text
 deployment_candidates/ltc4_best_low_active/ltc4_best_low_active.ino
 deployment_candidates/ltc4_best_high_active/ltc4_best_high_active.ino
 ```
 
-Low-active：
+Low-active:
 
 ```cpp
 RELAY_ON_LEVEL = LOW
 RELAY_OFF_LEVEL = HIGH
 ```
 
-High-active：
+High-active:
 
 ```cpp
 RELAY_ON_LEVEL = HIGH
 RELAY_OFF_LEVEL = LOW
 ```
 
-這兩份程式沒有自動判斷 relay 型態；實測時直接燒錄對應版本即可。
+These sketches do not automatically detect the relay type. Flash the version that matches the relay module used in the experiment.
 
-## Serial Monitor 指令
-
-```text
-g  開始一次 400-sample grasp window
-r  釋放所有繼電器
-b  使用 flash-stored 400-sample window 做 inference benchmark
-t  顯示單次 task-level timing breakdown
-m  重複 flash benchmark 100 次
-d  重複 timing breakdown 100 次
-```
-
-## `g` 指令流程
+## Serial Monitor Commands
 
 ```text
-輸入 g
-  -> 每 10 ms 取樣一次 flex sensor
-  -> 前 1.5 s 為抓握前狀態
-  -> 1.5 s 後五個繼電器啟動，開始抓握
-  -> 收滿 400 點
-  -> 執行 z-score normalization
-  -> 執行 LTC-4 Euler update
-  -> 執行 dense layer 與 softmax
-  -> 印出分類結果
-  -> 關閉繼電器並釋放
+g  Start one 400-sample grasp window
+r  Release all relays
+b  Run inference benchmark on a flash-stored 400-sample window
+t  Print one task-level timing breakdown
+m  Repeat the flash benchmark 100 times
+d  Repeat the timing breakdown 100 times
 ```
 
-## Flash replay benchmark
+## `g` Command Flow
 
-`b`, `t`, `m`, `d` 指令使用燒在程式中的 `flash_sequence.h` 測試固定 400-step 序列。這個模式不等待實際 10 ms 取樣，因此可用來估計純 on-board inference 的運算時間。
+```text
+Enter g
+  -> sample flex sensors every 10 ms
+  -> keep the first 1.5 s as the pre-grasp baseline period
+  -> activate five relays after 1.5 s to start grasping
+  -> collect 400 samples
+  -> run z-score normalization
+  -> run LTC-4 Euler updates
+  -> run dense layer and softmax
+  -> print the predicted class
+  -> turn off relays and release
+```
 
-目前 timing breakdown 的階段包含：
+## Flash Replay Benchmark
+
+The `b`, `t`, `m`, and `d` commands use a flash-stored `flash_sequence.h` 400-step sequence. This mode does not wait for real 10 ms sampling intervals, so it can estimate pure on-board inference computation time.
+
+Timing breakdown stages:
 
 ```text
 State reset
@@ -89,14 +89,14 @@ Argmax
 Total
 ```
 
-## 接線提醒
+## Wiring Notes
 
-Arduino 只處理低壓訊號：
+Arduino handles only low-voltage logic signals:
 
 ```text
-Arduino analog pins -> flex sensor 分壓輸出
+Arduino analog pins -> flex-sensor voltage-divider outputs
 Arduino digital pins -> relay module input pins
 Arduino GND -> relay control-side GND
 ```
 
-Relay module 需要自己的合適 DC 供電。泵浦、電磁閥與 110 V 電源側不可直接接到 Arduino 邏輯腳位；高壓與負載端應維持隔離，只透過 relay contact side 控制。
+The relay module needs an appropriate DC supply. The pump, solenoid valve, and 110 V load side must not be connected directly to Arduino logic pins. The high-voltage/load side should remain isolated and controlled only through relay contacts.

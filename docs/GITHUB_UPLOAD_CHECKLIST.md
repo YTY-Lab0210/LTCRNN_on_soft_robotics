@@ -1,28 +1,15 @@
 # GitHub Upload Checklist
 
-Before pushing this repository to GitHub, confirm:
+Before pushing this repository publicly, check the following items:
 
-```text
-1. Repository visibility: private or public
-2. Repository name
-3. Git commit author name
-4. Git commit author email
-5. Whether the full dataset can be uploaded
-6. Whether generated result figures should remain included
-```
+- The working tree contains no private thesis PDFs, approval forms, authorization forms, or internal draft files.
+- Generated caches such as `__pycache__/`, `.venv/`, `.npy`, `.npz`, model checkpoints, and large intermediate outputs are excluded.
+- Dataset folders contain only the intended cleaned CSV files.
+- README files describe the project, dataset format, experiment scripts, and Arduino deployment flow.
+- Arduino sketches use the correct relay active level for the hardware test setup.
+- Figure scripts point to committed source tables or documented local inputs.
+- Run parser tests before committing:
 
-Recommended default:
-
-```text
-visibility: private
-repo name: soft-robot-ltcrnn
-include dataset: yes, if sharing is allowed
-include signed thesis/admin documents: no
-include teacher draft files: no
-```
-
-Current prepared repository path:
-
-```text
-C:\Users\HAO\Desktop\YTY_from_macbook\soft-robot-ltcrnn-github
+```bash
+python -m unittest discover -s experiment_tools/tests -v
 ```

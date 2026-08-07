@@ -1,6 +1,6 @@
-# Baseline Models 說明
+# Baseline Models
 
-此資料夾保存早期 baseline 模型程式，用於和 LTC-RNN 比較。包含：
+This folder stores earlier baseline implementations used to compare against LTC-RNN:
 
 ```text
 Vanilla RNN
@@ -8,20 +8,20 @@ LSTM
 1D-CNN
 ```
 
-## 資料夾
+## Folders
 
-| 資料夾 | 用途 |
+| Folder | Purpose |
 | --- | --- |
-| `vanillarnn/` | Vanilla RNN / SimpleRNN baseline |
-| `lstm/` | LSTM baseline |
-| `cnn1d/` | 1D-CNN legacy baseline |
+| `vanillarnn/` | Vanilla RNN / SimpleRNN baseline scripts |
+| `lstm/` | LSTM baseline scripts |
+| `cnn1d/` | Legacy 1D-CNN baseline scripts |
 
-## 使用提醒
+## Usage Note
 
-這些 baseline 程式多數是早期實驗版本，部分檔案內仍保留舊電腦或舊資料集路徑。若要正式重跑目前 repo 的資料，建議優先使用：
+Most scripts in this folder come from earlier experiments, and some may still contain legacy local paths or older dataset assumptions. For the current paper-style benchmark, prefer:
 
 ```text
 src/ltc_bptt_5ch/run_extended_rnn_lstm_ltc_benchmark.py
 ```
 
-該檔案已整合 Vanilla RNN、LSTM 與 LTC 的 benchmark，比較適合作為目前 paper / GitHub 的主線結果來源。
+That script integrates Vanilla RNN, LSTM, and LTC models and is the recommended entry point for reproducing the current benchmark results.

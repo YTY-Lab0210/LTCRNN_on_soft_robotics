@@ -1,30 +1,30 @@
-# Source Code 說明
+# Source Code
 
-本資料夾保存 Python 訓練、分析、資料整理與 baseline 比較程式。主要研究流程以 LTC-RNN 為核心，並保留 Vanilla RNN、LSTM、1D-CNN 等比較模型。
+This folder contains Python scripts for model training, analysis, dataset preparation, and baseline comparison. The main workflow focuses on LTC-RNN, with Vanilla RNN, LSTM, and legacy 1D-CNN baselines retained for comparison.
 
-## 資料夾總覽
+## Folder Overview
 
-| 資料夾 | 用途 |
+| Folder | Purpose |
 | --- | --- |
-| `ltc_bptt_5ch/` | 5-channel 主實驗，包含 LTC-RNN、Vanilla RNN、LSTM benchmark、few-shot、部署候選模型與 Arduino 匯出 |
-| `ltc_bptt_3ch/` | 3-channel 主實驗，預設讀取 `data/dataset_new_new_new_3ch` |
-| `baselines/` | 早期 baseline 模型程式，包含 Vanilla RNN、LSTM、1D-CNN |
-| `utils/` | 資料集整理、3-channel dataset 產生、z-score 與資料切分工具 |
+| `ltc_bptt_5ch/` | Main 5-channel experiments, including LTC-RNN, Vanilla RNN, LSTM benchmarks, few-shot tests, deployment candidate selection, and Arduino export |
+| `ltc_bptt_3ch/` | Main 3-channel experiments, using `data/dataset_new_new_new_3ch` by default |
+| `baselines/` | Earlier baseline implementations for Vanilla RNN, LSTM, and 1D-CNN |
+| `utils/` | Dataset cleanup, 3-channel dataset generation, z-score normalization, and train/validation/test split utilities |
 
-## 建議閱讀順序
+## Suggested Reading Order
 
-1. 先看 `ltc_bptt_5ch/README.md`：理解主要 5-channel 實驗與 deployment candidate 來源。
-2. 再看 `ltc_bptt_3ch/README.md`：理解 reduced-sensor 3-channel 實驗。
-3. 若要看比較模型，讀 `baselines/README.md`。
-4. 若要重新整理 dataset，讀 `utils/README.md`。
+1. Read `ltc_bptt_5ch/README.md` for the main 5-channel experiments and deployment candidates.
+2. Read `ltc_bptt_3ch/README.md` for reduced-sensor 3-channel experiments.
+3. Read `baselines/README.md` for baseline model notes.
+4. Read `utils/README.md` if you need to rebuild or preprocess the datasets.
 
-## 資料格式提醒
+## Data Format
 
-目前 repo 內主要 raw dataset 位於：
+The main raw datasets are located at:
 
 ```text
 data/dataset_new_new_new/
 data/dataset_new_new_new_3ch/
 ```
 
-每筆 CSV 為 400-step time-series。5-channel 欄位為 `Thumb`, `Index`, `Middle`, `Ring`, `Pinky`；3-channel 欄位為 `Thumb`, `Middle`, `Pinky`。
+Each CSV is a 400-step time series. The 5-channel columns are `Thumb`, `Index`, `Middle`, `Ring`, and `Pinky`; the 3-channel columns are `Thumb`, `Middle`, and `Pinky`.

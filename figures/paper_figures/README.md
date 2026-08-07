@@ -1,43 +1,43 @@
-# Paper Figures 程式說明
+# Paper Figure Scripts
 
-此資料夾保存論文與簡報用圖表、重畫圖腳本、精簡結果表與輸出圖片。
+This folder contains paper and presentation figures, redraw scripts, compact result tables, and generated images.
 
-## 主要重畫圖腳本
+## Main Redraw Scripts
 
-| 檔案 | 用途 |
+| File | Purpose |
 | --- | --- |
-| `make_paper_compact_figures.py` | 產生 compact benchmark 圖與無數字 confusion matrix |
-| `redraw_mean_confusion_full_labels.py` | 產生完整類別標籤版本 confusion matrix |
-| `make_accuracy_f1_bar_bptt_channels.py` | 產生 3-channel / 5-channel Accuracy 與 Macro-F1 長條圖 |
-| `make_extended_benchmark_accuracy_by_family.py` | 將 Vanilla RNN、LSTM、LTC 按模型家族整理成 benchmark 圖 |
-| `make_ltc_neuron_sweep_5ch_3ch_bar.py` | 產生 LTC-1/2/4/8/16 的 5-channel / 3-channel 長條圖 |
-| `make_ltc_neuron_sweep_5ch_3ch_line.py` | 產生 LTC neuron sweep 折線圖 |
-| `make_few_shot_models_5ch_3ch.py` | 產生 few-shot 訓練樣本數曲線圖 |
-| `make_model_parameter_bar.py` | 產生模型參數量比較圖 |
-| `make_ltc_parameter_sweep_bar.py` | 產生 LTC 不同神經元參數量比較圖 |
+| `make_paper_compact_figures.py` | Generate compact benchmark figures and confusion matrices without cell values |
+| `redraw_mean_confusion_full_labels.py` | Generate confusion matrices with full class labels |
+| `make_accuracy_f1_bar_bptt_channels.py` | Generate 3-channel / 5-channel Accuracy and Macro-F1 bar charts |
+| `make_extended_benchmark_accuracy_by_family.py` | Group Vanilla RNN, LSTM, and LTC models by family in the benchmark chart |
+| `make_ltc_neuron_sweep_5ch_3ch_bar.py` | Generate LTC-1/2/4/8/16 bar charts for 5-channel and 3-channel inputs |
+| `make_ltc_neuron_sweep_5ch_3ch_line.py` | Generate the LTC neuron-sweep line chart |
+| `make_few_shot_models_5ch_3ch.py` | Generate few-shot training-sample curves |
+| `make_model_parameter_bar.py` | Generate model parameter-count comparison chart |
+| `make_ltc_parameter_sweep_bar.py` | Generate LTC parameter-count comparison across neuron counts |
 
-## 圖片與示意圖腳本
+## Image and Schematic Scripts
 
-| 檔案 | 用途 |
+| File | Purpose |
 | --- | --- |
-| `make_single_finger_waveform.py` | 產生單指抓握 ADC 波形圖 |
-| `remove_flex_sensor_background.py` | flex sensor 圖片去背 |
-| `remove_soft_finger_background.py` | 軟式手指圖片去背 |
+| `make_single_finger_waveform.py` | Generate a single-finger grasp ADC waveform |
+| `remove_flex_sensor_background.py` | Remove the background from the flex-sensor image |
+| `remove_soft_finger_background.py` | Remove the background from the soft-finger image |
 
-## 資料夾
+## Folders
 
-| 資料夾 | 內容 |
+| Folder | Contents |
 | --- | --- |
-| `source_tables/` | 供 figure scripts 使用的精簡 BPTT 結果表 |
-| `extended_benchmark/` | extended benchmark 圖與 summary CSV |
-| `few_shot_10_60/` | few-shot 10 到 60 samples per object 的圖與 CSV |
-| `extended_benchmark_smoke/` | smoke test 或短版 benchmark 輸出 |
+| `source_tables/` | Compact BPTT result tables used by figure scripts |
+| `extended_benchmark/` | Extended benchmark figures and summary CSV files |
+| `few_shot_10_60/` | Figures and CSV files for 10 to 60 training samples per object |
+| `extended_benchmark_smoke/` | Smoke-test or shortened benchmark outputs |
 
-## 常用輸出圖
+## Common Output Figures
 
-| 圖片 | 用途 |
+| Figure | Purpose |
 | --- | --- |
-| `paper_benchmark_accuracy_f1_compact.png` | paper-style 模型 benchmark |
-| `paper_confusion_no_numbers_5ch_3ch_ids.png` | 小尺寸 confusion matrix，用 class id 顯示 |
-| `ltc_neuron_sweep_5ch_3ch_bar.png` | LTC neuron number sweep |
-| `model_parameter_count_bar.png` | 模型參數量比較 |
+| `paper_benchmark_accuracy_f1_compact.png` | Paper-style model benchmark |
+| `paper_confusion_no_numbers_5ch_3ch_ids.png` | Compact confusion matrix using class IDs |
+| `ltc_neuron_sweep_5ch_3ch_bar.png` | LTC neuron-number sweep |
+| `model_parameter_count_bar.png` | Model parameter-count comparison |
