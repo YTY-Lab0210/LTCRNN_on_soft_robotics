@@ -1,0 +1,13 @@
+time_s,frame_index,actual_time_ms,raw_frame,labeled_frame
+0.0,0,0,raw_data/frames_0p5s/frame_t00.0s.jpg,figures/labeled_frames/theta_t00.0s.jpg
+0.5,15,500,raw_data/frames_0p5s/frame_t00.5s.jpg,figures/labeled_frames/theta_t00.5s.jpg
+1.0,30,1000,raw_data/frames_0p5s/frame_t01.0s.jpg,figures/labeled_frames/theta_t01.0s.jpg
+1.5,45,1500,raw_data/frames_0p5s/frame_t01.5s.jpg,figures/labeled_frames/theta_t01.5s.jpg
+2.0,60,2000,raw_data/frames_0p5s/frame_t02.0s.jpg,figures/labeled_frames/theta_t02.0s.jpg
+2.5,75,2500,raw_data/frames_0p5s/frame_t02.5s.jpg,figures/labeled_frames/theta_t02.5s.jpg
+3.0,90,3000,raw_data/frames_0p5s/frame_t03.0s.jpg,figures/labeled_frames/theta_t03.0s.jpg
+3.5,105,3500,raw_data/frames_0p5s/frame_t03.5s.jpg,figures/labeled_frames/theta_t03.5s.jpg
+4.0,120,4000,raw_data/frames_0p5s/frame_t04.0s.jpg,figures/labeled_frames/theta_t04.0s.jpg
+4.5,135,4500,raw_data/frames_0p5s/frame_t04.5s.jpg,figures/labeled_frames/theta_t04.5s.jpg
+5.0,150,5000,raw_data/frames_0p5s/frame_t05.0s.jpg,figures/labeled_frames/theta_t05.0s.jpg
+5.5,165,5500,raw_data/frames_0p5s/frame_t05.5s.jpg,figures/labeled_frames/theta_t05.5s.jpg

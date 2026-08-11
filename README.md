@@ -142,7 +142,7 @@ figures/paper_figures/bptt_mean_confusion_3ch.png
 
 This figure compares the parameter count of LTC-4 with Vanilla RNN-8 and LSTM-8, showing why LTC-4 is a practical candidate for microcontroller deployment.
 
-## Finger Bending θ Analysis
+## Finger Bending Theta Analysis
 
 The manually annotated local joint-angle analysis is stored at:
 
@@ -150,23 +150,23 @@ The manually annotated local joint-angle analysis is stored at:
 analysis/finger_bending_theta_analysis/
 ```
 
-It includes the original finger-bending video, 0.5 s extracted frames, manually clicked point data, corrected θ1 / θ2 angle tables, an Excel workbook, and PPT-ready figures.
+It includes the original finger-bending video, 0.5 s extracted frames, manually clicked point data, final theta1 / theta2 angle tables, an Excel workbook, and PPT-ready figures.
 
 <p align="center">
-  <img src="analysis/finger_bending_theta_analysis/angle_definition/theta_angle_definition_illustration.png" width="480" alt="Theta angle definition">
+  <img src="analysis/finger_bending_theta_analysis/angle_definition/theta_definition.png" width="480" alt="Theta angle definition">
 </p>
 
 Frame preview used for manual point annotation:
 
 <p align="center">
-  <img src="analysis/finger_bending_theta_analysis/raw_data/manual_theta_point_templates_contact_sheet.jpg" width="720" alt="Finger bending frame preview">
+  <img src="analysis/finger_bending_theta_analysis/raw_data/frame_preview.jpg" width="720" alt="Finger bending frame preview">
 </p>
 
 The local joint angles are defined as:
 
 ```text
-θ1 = 180 deg - angle(A1, J1, B1)
-θ2 = 180 deg - angle(A2, J2, B2)
+theta1 = 180 deg - angle(A1, J1, B1)
+theta2 = 180 deg - angle(A2, J2, B2)
 ```
 
 ## Main Entry Points

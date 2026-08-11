@@ -1,35 +1,33 @@
-# Finger Bending θ Analysis
+# Finger Bending Theta Analysis
 
-This folder contains the manually annotated finger-bending angle analysis used to illustrate local joint deformation of a soft robotic finger.
+This folder contains the final finger-bending angle analysis used to illustrate local joint deformation of a soft robotic finger.
 
 ## Contents
 
 ```text
 video/
-  finger_curve.mp4
+  finger_bending.mp4
 
 raw_data/
-  frames_every_0p5s_raw/
-  frames_every_0p5s_manifest.csv
-  manual_theta_point_templates_contact_sheet.jpg
+  frame_preview.jpg
+  frames_manifest.csv
+  frames_0p5s/
 
 point_data/
-  manual_theta_points_filled.csv
-  manual_theta_points_corrected_angles.csv
-  manual_theta_correction_report.csv
-  theta_angles_corrected_greek.csv
+  theta_points.csv
+  theta_angles.csv
 
 excel/
-  theta_angle_analysis.xlsx
-  theta_angle_analysis_summary_preview.png
+  theta_analysis.xlsx
+  theta_summary_preview.png
 
 figures/
-  theta1_theta2_time_series_greek.png
-  theta1_theta2_phase_plot_greek.png
-  manual_theta_labeled_frames/
+  theta_time_series.png
+  theta_phase_plot.png
+  labeled_frames/
 
 angle_definition/
-  theta_angle_definition_illustration.png
+  theta_definition.png
 ```
 
 ## Angle Definition
@@ -37,43 +35,45 @@ angle_definition/
 The bending angles are defined locally around two finger joints:
 
 ```text
-θ1 = 180 deg - angle(A1, J1, B1)
-θ2 = 180 deg - angle(A2, J2, B2)
+theta1 = 180 deg - angle(A1, J1, B1)
+theta2 = 180 deg - angle(A2, J2, B2)
 ```
 
-- `θ1`: distal joint bending angle, measured from the fingertip-side joint.
-- `θ2`: proximal joint bending angle, measured from the next joint toward the finger base.
-- `A1, J1, B1`: manually selected local points for θ1.
-- `A2, J2, B2`: manually selected local points for θ2.
+- `theta1`: distal joint bending angle, measured from the fingertip-side joint.
+- `theta2`: proximal joint bending angle, measured from the next joint toward the finger base.
+- `A1, J1, B1`: manually selected local points for `theta1`.
+- `A2, J2, B2`: manually selected local points for `theta2`.
 
-The first three samples from `0.0 s` to `1.0 s` are set to `0 deg` because the finger is visually straight in that segment. A small late-stage θ1 fluctuation is corrected in `manual_theta_points_corrected_angles.csv`; the original clicked points remain in `manual_theta_points_filled.csv`.
+The first three samples from `0.0 s` to `1.0 s` are set to `0 deg` because the finger is visually straight in that segment.
 
-## Key Figures
+## Preview
 
 Frame preview used for manual point annotation:
 
 <p align="center">
-  <img src="raw_data/manual_theta_point_templates_contact_sheet.jpg" width="720" alt="Finger bending frame preview">
+  <img src="raw_data/frame_preview.jpg" width="720" alt="Finger bending frame preview">
 </p>
 
 Angle definition:
 
-![Angle definition](angle_definition/theta_angle_definition_illustration.png)
+<p align="center">
+  <img src="angle_definition/theta_definition.png" width="520" alt="Theta angle definition">
+</p>
 
-θ1 / θ2 time-series plot:
+Theta time-series plot:
 
-![Theta time series](figures/theta1_theta2_time_series_greek.png)
+<p align="center">
+  <img src="figures/theta_time_series.png" width="620" alt="Theta time series">
+</p>
 
-θ1-θ2 relation:
+Theta phase plot:
 
-![Theta phase plot](figures/theta1_theta2_phase_plot_greek.png)
+<p align="center">
+  <img src="figures/theta_phase_plot.png" width="520" alt="Theta phase plot">
+</p>
 
-## Workbook
+## Data Files
 
-The Excel workbook `excel/theta_angle_analysis.xlsx` includes:
-
-- corrected θ1 / θ2 angle table,
-- manually clicked point coordinates,
-- formula-based local angle calculation,
-- correction report,
-- angle definition illustration.
+- `point_data/theta_points.csv`: manually selected point coordinates for the two local joints.
+- `point_data/theta_angles.csv`: final `theta1` and `theta2` angle values over time.
+- `excel/theta_analysis.xlsx`: spreadsheet version of the angle analysis.
