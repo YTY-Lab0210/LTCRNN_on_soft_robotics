@@ -142,6 +142,27 @@ figures/paper_figures/bptt_mean_confusion_3ch.png
 
 This figure compares the parameter count of LTC-4 with Vanilla RNN-8 and LSTM-8, showing why LTC-4 is a practical candidate for microcontroller deployment.
 
+## Finger Bending θ Analysis
+
+The manually annotated local joint-angle analysis is stored at:
+
+```text
+analysis/finger_bending_theta_analysis/
+```
+
+It includes the original finger-bending video, 0.5 s extracted frames, manually clicked point data, corrected θ1 / θ2 angle tables, an Excel workbook, and PPT-ready figures.
+
+<p align="center">
+  <img src="analysis/finger_bending_theta_analysis/angle_definition/theta_angle_definition_illustration.png" width="480" alt="Theta angle definition">
+</p>
+
+The local joint angles are defined as:
+
+```text
+θ1 = 180 deg - angle(A1, J1, B1)
+θ2 = 180 deg - angle(A2, J2, B2)
+```
+
 ## Main Entry Points
 
 Training and analysis scripts:

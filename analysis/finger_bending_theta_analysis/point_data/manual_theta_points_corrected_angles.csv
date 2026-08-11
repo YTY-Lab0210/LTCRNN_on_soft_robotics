@@ -1,0 +1,13 @@
+time_s,image_path,theta1_deg,theta2_deg,theta1_front_zeroed,theta2_front_zeroed,theta1_corrected_deg,theta2_corrected_deg,theta1_delta_deg,theta2_delta_deg
+0.0,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t00.0s.jpg,2.902826,3.060651,0.0,0.0,0.0,0.0,-2.902826,-3.060651
+0.5,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t00.5s.jpg,2.72628,1.684277,0.0,0.0,0.0,0.0,-2.72628,-1.684277
+1.0,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t01.0s.jpg,0.0,4.085546,0.0,0.0,0.0,0.0,0.0,-4.085546
+1.5,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t01.5s.jpg,8.031666,10.315129,8.031666,10.315129,8.031666,10.315129,0.0,0.0
+2.0,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t02.0s.jpg,34.476511,35.324631,34.476511,35.324631,34.476511,35.324631,0.0,0.0
+2.5,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t02.5s.jpg,35.90981,50.389481,35.90981,50.389481,35.90981,50.389481,0.0,0.0
+3.0,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t03.0s.jpg,48.564577,54.711975,48.564577,54.711975,48.1525555,54.711975,-0.4120215000000016,0.0
+3.5,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t03.5s.jpg,47.740534,58.439003,47.740534,58.439003,48.1525555,58.439003,0.4120215000000016,0.0
+4.0,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t04.0s.jpg,67.169379,60.43515,67.169379,60.43515,62.86487100000001,60.256878,-4.3045079999999984,-0.17827199999999976
+4.5,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t04.5s.jpg,58.560363,60.078606,58.560363,60.078606,62.86487100000001,60.256878,4.3045080000000056,0.17827199999999976
+5.0,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t05.0s.jpg,67.645612,67.5353,67.645612,67.5353,65.60561849999999,67.5353,-2.0399935000000085,0.0
+5.5,C:\Users\HAO\Desktop\YTY_from_macbook\finger_curve_analysis\manual_theta_point_templates\manual_template_t05.5s.jpg,63.565625,68.763129,63.565625,68.763129,65.60561849999999,68.763129,2.0399934999999942,0.0
