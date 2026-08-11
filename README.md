@@ -156,6 +156,12 @@ It includes the original finger-bending video, 0.5 s extracted frames, manually 
   <img src="analysis/finger_bending_theta_analysis/angle_definition/theta_angle_definition_illustration.png" width="480" alt="Theta angle definition">
 </p>
 
+Frame preview used for manual point annotation:
+
+<p align="center">
+  <img src="analysis/finger_bending_theta_analysis/raw_data/manual_theta_point_templates_contact_sheet.jpg" width="720" alt="Finger bending frame preview">
+</p>
+
 The local joint angles are defined as:
 
 ```text

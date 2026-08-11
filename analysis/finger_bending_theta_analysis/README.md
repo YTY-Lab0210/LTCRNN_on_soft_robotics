@@ -50,6 +50,12 @@ The first three samples from `0.0 s` to `1.0 s` are set to `0 deg` because the f
 
 ## Key Figures
 
+Frame preview used for manual point annotation:
+
+<p align="center">
+  <img src="raw_data/manual_theta_point_templates_contact_sheet.jpg" width="720" alt="Finger bending frame preview">
+</p>
+
 Angle definition:
 
 ![Angle definition](angle_definition/theta_angle_definition_illustration.png)
